@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 using Serilog.Context;
 
 namespace AspNetMvcCore.CorrelationId.Middleware
@@ -14,7 +13,7 @@ namespace AspNetMvcCore.CorrelationId.Middleware
             _next = next;
         }
 
-        public Task Invoke(HttpContext context, ILogger<AddCorrelationIdToLogContextMiddleware> logger)
+        public Task Invoke(HttpContext context)
         {
             using (LogContext.PushProperty("CorrelationId", context.TraceIdentifier))
             {
