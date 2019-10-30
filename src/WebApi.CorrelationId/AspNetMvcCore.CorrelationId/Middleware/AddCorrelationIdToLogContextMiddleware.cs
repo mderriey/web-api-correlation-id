@@ -13,11 +13,11 @@ namespace AspNetMvcCore.CorrelationId.Middleware
             _next = next;
         }
 
-        public Task Invoke(HttpContext context)
+        public async Task Invoke(HttpContext context)
         {
             using (LogContext.PushProperty("CorrelationId", context.TraceIdentifier))
             {
-                return _next(context);
+                await _next(context);
             }
         }
     }
